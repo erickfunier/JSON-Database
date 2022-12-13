@@ -10,7 +10,7 @@ import java.net.Socket;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-public class Main {
+public class Server {
 
     private static void saveDb(String filePath, ReadWriteLock lock){
         lock.readLock().lock();

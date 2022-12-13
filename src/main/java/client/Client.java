@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
 
-public class Main {
+public class Client {
     public static void main(String[] args) {
         String filePath = System.getProperty("user.dir") + "/src/main/java/client/data/";
 
