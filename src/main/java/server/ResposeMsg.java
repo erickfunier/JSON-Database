@@ -37,9 +37,6 @@ public class ResposeMsg {
         Gson gson = gsonBuilder
                 .create();
 
-        //System.out.println(getValue());
-        //System.out.println(gson.toJson(this));
-
         return gson.toJson(this);
     }
 }

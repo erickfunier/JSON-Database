@@ -16,11 +16,11 @@ import java.util.concurrent.locks.ReadWriteLock;
 
 public class ThreadHandleCommand extends Thread {
 
-    private Socket socket;
-    private MainCommand command;
-    private String filePath;
-    private Lock readLock;
-    private Lock writeLock;
+    private final Socket socket;
+    private final MainCommand command;
+    private final String filePath;
+    private final Lock readLock;
+    private final Lock writeLock;
 
     public ThreadHandleCommand(Socket socket, MainCommand command, String filePath, ReadWriteLock lock) {
         this.socket = socket;
@@ -77,7 +77,7 @@ public class ThreadHandleCommand extends Thread {
             return loadDb().containsKey(key.get(0));
     }
 
-    private Object getJsonRecursive(JsonObject jsonObject, List<String> key) {
+    private com.google.gson.JsonElement getJsonRecursive(JsonObject jsonObject, List<String> key) {
         if (key.size() > 1 && checkIfKeyExists(key)) {
             return getJsonRecursive(jsonObject.get(key.get(0)).getAsJsonObject(), key.stream().skip(1).toList());
         } else {
@@ -86,7 +86,7 @@ public class ThreadHandleCommand extends Thread {
 
     }
 
-    private Object getValue(List<String> key) {
+    private com.google.gson.JsonElement getValue(List<String> key) {
         if (key.size() > 1 && checkIfKeyExists(key)) {
             return getJsonRecursive(new Gson().toJsonTree(loadDb().get(key.get(0))).getAsJsonObject(), key.stream().skip(1).toList());
         } else {

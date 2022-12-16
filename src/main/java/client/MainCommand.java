@@ -45,6 +45,10 @@ public class MainCommand {
         this.fileName = fileName;
     }
 
+    public MainCommand(String filePath) {
+        this.filePath = filePath;
+    }
+
     public String getType() {
         return type;
     }
@@ -69,26 +73,6 @@ public class MainCommand {
         this.value = value;
     }
 
-    public String getFullCommand() {
-        if (type != null) {
-            switch (type) {
-                case "get" -> {
-                    return "get " + key;
-                }
-                case "delete" -> {
-                    return "delete " + key;
-                }
-                case "set" -> {
-                    return "set " + key + " " + value;
-                }
-                case "exit" -> {
-                    return type;
-                }
-            }
-        }
-        return null;
-    }
-
     private void loadCommandFromFile(){
         try (Reader reader = new FileReader(filePath + fileName)) {
             Type stringStringMap = new TypeToken<Map<String, Object>>(){}.getType();
@@ -106,10 +90,6 @@ public class MainCommand {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public MainCommand(String filePath) {
-        this.filePath = filePath;
     }
 
     public String getFullCommandJSON() {
